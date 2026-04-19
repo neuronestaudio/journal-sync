@@ -139,8 +139,9 @@ form.addEventListener('submit', async (e) => {
 
   // Preserve the original createdAt if this entry already exists locally
   let createdAt;
+  let existing;
   try {
-    const existing = await getEntryByDate(dateVal);
+    existing = await getEntryByDate(dateVal);
     createdAt = existing?.createdAt ?? new Date().toISOString();
   } catch {
     createdAt = new Date().toISOString();
@@ -158,52 +159,68 @@ form.addEventListener('submit', async (e) => {
     return el ? el.value.trim() : '';
   };
 
+  // Helper to append text to existing value (for running log functionality)
+  const appendValue = (fieldId, existingEntry) => {
+    const newValue = val(fieldId);
+    if (!newValue) return existingEntry?.[fieldId] || '';
+    const existingValue = existingEntry?.[fieldId] || '';
+    return existingValue ? `${existingValue} ${newValue}` : newValue;
+  };
+
+  // Helper to append habit notes (for running log functionality)
+  const appendHabitNote = (noteId, existingEntry) => {
+    const newValue = getHabitNote(noteId);
+    if (!newValue) return existingEntry?.[noteId] || '';
+    const existingValue = existingEntry?.[noteId] || '';
+    return existingValue ? `${existingValue} ${newValue}` : newValue;
+  };
+
   /** @type {JournalEntry} */
   const entry = {
     id:                  dateVal,
     date:                dateVal,
     day:                 dayName(dateVal),
 
-    // Reflection fields
+    // Reflection fields (append to existing)
     wakeTime:            val('wakeTime'),
-    people:              val('people'),
-    activity:            val('activity'),
-    highlight:           val('highlight'),
-    mistakes:            val('mistakes'),
-    insight:             val('insight'),
-    gratefulFor:         val('gratefulFor'),
+    people:              appendValue('people', existing),
+    activity:            appendValue('activity', existing),
+    highlight:           appendValue('highlight', existing),
+    mistakes:            appendValue('mistakes', existing),
+    insight:             appendValue('insight', existing),
+    gratefulFor:         appendValue('gratefulFor', existing),
 
     // Habits with optional notes
     intellectual:        getHabitValue('intellectual'),
-    intellectualNote:    getHabitNote('intellectualNote'),
+    intellectualNote:    appendHabitNote('intellectualNote', existing),
     hobby:               getHabitValue('hobby'),
-    hobbyNote:           getHabitNote('hobbyNote'),
+    hobbyNote:           appendHabitNote('hobbyNote', existing),
     meditation:          getHabitValue('meditation'),
-    meditationNote:      getHabitNote('meditationNote'),
+    meditationNote:      appendHabitNote('meditationNote', existing),
     threeLWater:         getHabitValue('threeLWater'),
-    threeLWaterNote:     getHabitNote('threeLWaterNote'),
+    threeLWaterNote:     appendHabitNote('threeLWaterNote', existing),
     toxic:               getHabitValue('toxic'),
-    toxicNote:           getHabitNote('toxicNote'),
+    toxicNote:           appendHabitNote('toxicNote', existing),
     gym:                 getHabitValue('gym'),
-    gymNote:             getHabitNote('gymNote'),
+    gymNote:             appendHabitNote('gymNote', existing),
     cardio:              getHabitValue('cardio'),
-    cardioNote:          getHabitNote('cardioNote'),
+    cardioNote:          appendHabitNote('cardioNote', existing),
     mj:                  getHabitValue('mj'),
-    mjNote:              getHabitNote('mjNote'),
+    mjNote:              appendHabitNote('mjNote', existing),
     per:                 getHabitValue('per'),
-    perNote:             getHabitNote('perNote'),
+    perNote:             appendHabitNote('perNote', existing),
     scl:                 getHabitValue('scl'),
-    sclNote:             getHabitNote('sclNote'),
+    sclNote:             appendHabitNote('sclNote', existing),
     phys:                getHabitValue('phys'),
-    physNote:            getHabitNote('physNote'),
+    physNote:            appendHabitNote('physNote', existing),
     fam:                 getHabitValue('fam'),
-    famNote:             getHabitNote('famNote'),
+    famNote:             appendHabitNote('famNote', existing),
     nootropic:           getHabitValue('nootropic'),
-    nootropicNote:       getHabitNote('nootropicNote'),
+    nootropicNote:       appendHabitNote('nootropicNote', existing),
 
     // Money checkbox and notes
     money:               getHabitValue('money'),
-    moneyNote:           getHabitNote('moneyNote'),
+    moneyNote:           appendHabitNote('moneyNote', existing),
 
     // Metadata
     createdAt,
@@ -218,7 +235,7 @@ form.addEventListener('submit', async (e) => {
   try {
     await saveEntry(entry);
     clearDraft();
-    showMessage('Saved locally.', 'success');
+    showMessage('✓ Saved & accumulated to today\'s entry.', 'success');
     await refreshStatusUI();
 
     if (!isConfigured()) {
