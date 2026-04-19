@@ -370,7 +370,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 /* ── Habit tracking grid ──────────────────────────────────── */
 .habit-grid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 14px;
   margin-bottom: 8px;
 }
