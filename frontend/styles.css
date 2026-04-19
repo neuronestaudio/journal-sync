@@ -261,6 +261,27 @@ body {
   line-height: 1.65;
 }
 
+/* Section-specific textarea colors */
+.field-textarea--activity {
+  background: rgba(76, 175, 116, 0.06);
+  border-color: rgba(76, 175, 116, 0.15);
+}
+
+.field-textarea--activity:focus {
+  background: rgba(76, 175, 116, 0.10);
+  border-color: var(--c-border-focus);
+}
+
+.field-textarea--reflection {
+  background: rgba(100, 150, 200, 0.06);
+  border-color: rgba(100, 150, 200, 0.15);
+}
+
+.field-textarea--reflection:focus {
+  background: rgba(100, 150, 200, 0.10);
+  border-color: var(--c-border-focus);
+}
+
 /* Readonly day field */
 .field-input[readonly] {
   opacity: 0.55;
