@@ -78,9 +78,43 @@ dateInput.addEventListener('change', () => {
   if (dateInput.value) dayInput.value = dayName(dateInput.value);
 });
 
-// ─── Dynamic Activity Inputs ──────────────────────────────────────
+// ─── Form Lock ────────────────────────────────────────────────────────────
 
-function setupActivityControls() {
+let isFormLocked = false;
+
+const lockBtn = document.getElementById('lock-btn');
+lockBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  toggleFormLock();
+});
+
+function toggleFormLock() {
+  isFormLocked = !isFormLocked;
+
+  if (isFormLocked) {
+    // Lock the form
+    form.classList.add('form-locked');
+    // Disable all inputs, textareas, checkboxes, buttons (except lock button)
+    form.querySelectorAll('input, textarea, select, button:not(#lock-btn)').forEach(el => {
+      el.disabled = true;
+    });
+    lockBtn.classList.add('locked');
+    lockBtn.innerHTML = '<span class="btn-icon" aria-hidden="true">🔒</span> Unlock';
+    showToast('Form locked — all inputs disabled', 'success');
+  } else {
+    // Unlock the form
+    form.classList.remove('form-locked');
+    // Re-enable all inputs (except readonly ones)
+    form.querySelectorAll('input, textarea, select, button:not(#lock-btn)').forEach(el => {
+      if (!el.hasAttribute('readonly')) {
+        el.disabled = false;
+      }
+    });
+    lockBtn.classList.remove('locked');
+    lockBtn.innerHTML = '<span class="btn-icon" aria-hidden="true">🔓</span> Lock';
+    showToast('Form unlocked — ready to edit', 'success');
+  }
+}
   const container = document.getElementById('activities-container');
   const addBtn = document.getElementById('add-activity-btn');
 
