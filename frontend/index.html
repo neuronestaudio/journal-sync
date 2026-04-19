@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+  <!-- PWA / theme -->
+  <meta name="theme-color" content="#182818" />
+  <meta name="description" content="Journal Sync — Daily reflections, offline-first, syncs to Google Sheets" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Journal" />
+
+  <title>Journal Sync</title>
+
+  <link rel="stylesheet"   href="styles.css" />
+  <link rel="manifest"     href="manifest.json" />
+  <link rel="icon"         type="image/svg+xml" href="icons/icon.svg" />
+  <link rel="apple-touch-icon" href="icons/icon.svg" />
+</head>
+<body>
+
+  <!-- ── Sticky header ──────────────────────────────────────── -->
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="header-title">
+        <span class="app-logo" aria-hidden="true">📓</span>
+        <h1>Journal Sync</h1>
+      </div>
+      <div class="header-badges">
+        <span id="connectivity-badge" class="badge badge--online"
+              aria-label="Connection status: Online">Online</span>
+        <span id="sync-badge"         class="badge" hidden
+              aria-label="Sync status"></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Status bar ─────────────────────────────────────────── -->
+  <div class="status-bar" role="status" aria-live="polite" aria-atomic="false">
+    <span id="unsynced-count" class="status-item" hidden>
+      <span class="dot dot--warning" aria-hidden="true"></span>
+      <span id="unsynced-number">0</span>&thinsp;unsynced
+    </span>
+    <span id="last-synced-label" class="status-item" hidden>
+      Last synced:&nbsp;<time id="last-synced-time">—</time>
+    </span>
+  </div>
+
+  <!-- ── Journal form ───────────────────────────────────────── -->
+  <main class="journal-main">
+    <form id="journal-form" novalidate autocomplete="off">
+
+      <!-- Date · Day · Wake Time -->
+      <section class="card" aria-label="Date and time">
+        <div class="card-row card-row--two">
+          <div class="field">
+            <label class="field-label" for="date">Date</label>
+            <input type="date" id="date" name="date" class="field-input"
+                   required aria-required="true" />
+          </div>
+          <div class="field">
+            <label class="field-label" for="day">Day</label>
+            <input type="text" id="day" name="day" class="field-input"
+                   readonly tabindex="-1" aria-readonly="true" />
+          </div>
+        </div>
+        <div class="field" style="margin-top:12px;">
+          <label class="field-label" for="wakeTime">Wake Time</label>
+          <input type="time" id="wakeTime" name="wakeTime" class="field-input" />
+        </div>
+      </section>
+
+      <!-- People · Activity -->
+      <section class="card" aria-label="Daily activity">
+        <div class="field">
+          <label class="field-label" for="people">People</label>
+          <textarea id="people" name="people" class="field-textarea" rows="2"
+                    placeholder="Who did you spend time with?"></textarea>
+        </div>
+        <div class="field" style="margin-top:12px;">
+          <label class="field-label" for="activity">Activity</label>
+          <textarea id="activity" name="activity" class="field-textarea" rows="2"
+                    placeholder="What did you do?"></textarea>
+        </div>
+      </section>
+
+      <!-- Reflections -->
+      <section class="card" aria-label="Reflections">
+        <div class="field">
+          <label class="field-label" for="highlight">What went well / Highlight</label>
+          <textarea id="highlight" name="highlight" class="field-textarea" rows="3"
+                    placeholder="Best part of the day..."></textarea>
+        </div>
+        <div class="field" style="margin-top:12px;">
+          <label class="field-label" for="mistakes">Mistakes / Learnings</label>
+          <textarea id="mistakes" name="mistakes" class="field-textarea" rows="3"
+                    placeholder="What would you do differently?"></textarea>
+        </div>
+        <div class="field" style="margin-top:12px;">
+          <label class="field-label" for="insight">Insight</label>
+          <textarea id="insight" name="insight" class="field-textarea" rows="3"
+                    placeholder="What did today teach you?"></textarea>
+        </div>
+        <div class="field" style="margin-top:12px;">
+          <label class="field-label" for="gratefulFor">Grateful for…</label>
+          <textarea id="gratefulFor" name="gratefulFor" class="field-textarea" rows="2"
+                    placeholder="What are you grateful for?"></textarea>
+        </div>
+      </section>
+
+      <!-- Habit Tracking -->
+      <section class="card" aria-label="Habits">
+        <div class="habit-grid">
+          <!-- Intellectual (Reading/Habit) -->
+          <div class="habit-item">
+            <label class="habit-label">
+              <input type="checkbox" id="intellectual" name="intellectual" class="habit-check" />
+              Intellectual
+            </label>
+            <input type="text" id="intellectualNote" name="intellectualNote" class="habit-note" placeholder="Notes...">
+          </div>
+
+          <!-- Hobby -->
+          <div class="habit-item">
+            <label class="habit-label">
+              <input type="checkbox" id="hobby" name="hobby" class="habit-check" />
+              Hobby
+            </label>
+            <input type="text" id="hobbyNote" name="hobbyNote" class="habit-note" placeholder="Notes...">
+          </div>
+
+          <!-- Meditation -->
+          <div class="habit-item">
+            <label class="habit-label">
+              <input type="checkbox" id="meditation" name="meditation" class="habit-check" />
+              Meditation
+            </label>
+            <input type="text" id="meditationNote" name="meditationNote" class="habit-note" placeholder="Notes...">
+          </div>
+
+          <!-- 3L Water -->
+          <div class="habit-item">
+            <label class="habit-label">
+              <input type="checkbox" id="threeLWater" name="threeLWater" class="habit-check" />
+              3L Water
+            </label>
+            <input type="text" id="threeLWaterNote" name="threeLWaterNote" class="habit-note" placeholder="Notes...">
+          </div>
+
+          <!-- Toxic -->
+          <div class="habit-item">
+            <label class="habit-label">
+              <input type="checkbox" id="toxic" name="toxic" class="habit-check" />
+              Toxic
+            </label>
+            <input type="text" id="toxicNote" name="toxicNote" class="habit-note" placeholder="Notes...">
+          </div>
+
+          <!-- Gym -->
+          <div class="habit-item">
+            <label class="habit-label">
+              <input type="checkbox" id="gym" name="gym" class="habit-check" />
+              Gym
+            </label>
+            <input type="text" id="gymNote" name="gymNote" class="habit-note" placeholder="Notes...">
+          </div>
+
+          <!-- Cardio -->
+          <div class="habit-item">
+            <label class="habit-label">
+              <input type="checkbox" id="cardio" name="cardio" class="habit-check" />
+              Cardio
+            </label>
+            <input type="text" id="cardioNote" name="cardioNote" class="habit-note" placeholder="Notes...">
+          </div>
+
+          <!-- MJ -->
+          <div class="habit-item">
+            <label class="habit-label">
+              <input type="checkbox" id="mj" name="mj" class="habit-check" />
+              MJ
+            </label>
+            <input type="text" id="mjNote" name="mjNote" class="habit-note" placeholder="Notes...">
+          </div>
+
+          <!-- PER -->
+          <div class="habit-item">
+            <label class="habit-label">
+              <input type="checkbox" id="per" name="per" class="habit-check" />
+              PER
+            </label>
+            <input type="text" id="perNote" name="perNote" class="habit-note" placeholder="Notes...">
+          </div>
+
+          <!-- SCL -->
+          <div class="habit-item">
+            <label class="habit-label">
+              <input type="checkbox" id="scl" name="scl" class="habit-check" />
+              SCL
+            </label>
+            <input type="text" id="sclNote" name="sclNote" class="habit-note" placeholder="Notes...">
+          </div>
+
+          <!-- PHYS -->
+          <div class="habit-item">
+            <label class="habit-label">
+              <input type="checkbox" id="phys" name="phys" class="habit-check" />
+              PHYS
+            </label>
+            <input type="text" id="physNote" name="physNote" class="habit-note" placeholder="Notes...">
+          </div>
+
+          <!-- FAM -->
+          <div class="habit-item">
+            <label class="habit-label">
+              <input type="checkbox" id="fam" name="fam" class="habit-check" />
+              FAM
+            </label>
+            <input type="text" id="famNote" name="famNote" class="habit-note" placeholder="Notes...">
+          </div>
+
+          <!-- NOOTROPIC -->
+          <div class="habit-item">
+            <label class="habit-label">
+              <input type="checkbox" id="nootropic" name="nootropic" class="habit-check" />
+              NOOTROPIC
+            </label>
+            <input type="text" id="nootropicNote" name="nootropicNote" class="habit-note" placeholder="Notes...">
+          </div>
+        </div>
+
+        <!-- Money -->
+        <div class="field" style="margin-top: 16px;">
+          <label class="field-label" for="money">$ (money)</label>
+          <input type="text" id="money" name="money" class="field-input" placeholder="Amount or notes...">
+        </div>
+      </section>
+
+      <!-- Actions -->
+      <section class="card actions-card" aria-label="Save and sync">
+        <div class="actions">
+          <button type="submit" id="save-btn" class="btn btn--primary">
+            <span class="btn-icon" aria-hidden="true">💾</span>
+            Save Locally
+          </button>
+          <button type="button" id="sync-btn" class="btn btn--secondary">
+            <span class="btn-icon" aria-hidden="true">🔄</span>
+            Sync Now
+          </button>
+          <button type="button" id="clear-btn" class="btn btn--secondary">
+            <span class="btn-icon" aria-hidden="true">🗑️</span>
+            Clear
+          </button>
+        </div>
+        <p id="form-message" class="form-message" role="alert" hidden></p>
+      </section>
+
+    </form>
+  </main>
+
+  <!-- Toast notification (assertive for immediate feedback) -->
+  <div id="toast" class="toast"
+       role="status" aria-live="assertive" aria-atomic="true"
+       hidden></div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
