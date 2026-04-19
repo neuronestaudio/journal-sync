@@ -76,12 +76,12 @@
         <div class="field">
           <label class="field-label" for="people">People</label>
           <textarea id="people" name="people" class="field-textarea field-textarea--activity" rows="2"
-                    placeholder="Who did you spend time with?"></textarea>
+                    placeholder="Family, friends, colleagues, alone? Who mattered today?"></textarea>
         </div>
         <div class="field" style="margin-top:12px;">
           <label class="field-label" for="activity">Activity</label>
           <textarea id="activity" name="activity" class="field-textarea field-textarea--activity" rows="2"
-                    placeholder="What did you do?"></textarea>
+                    placeholder="Work, exercise, creative, learning, rest — what filled your day?"></textarea>
         </div>
       </section>
 
@@ -90,22 +90,22 @@
         <div class="field">
           <label class="field-label" for="highlight">What moved forward? / Highlights</label>
           <textarea id="highlight" name="highlight" class="field-textarea field-textarea--reflection" rows="3"
-                    placeholder="Best part of the day..."></textarea>
+                    placeholder="Wins, breakthroughs, progress, or moments that mattered..."></textarea>
         </div>
         <div class="field" style="margin-top:12px;">
           <label class="field-label" for="mistakes">What I Learned / Growth</label>
           <textarea id="mistakes" name="mistakes" class="field-textarea field-textarea--reflection" rows="3"
-                    placeholder="What would you do differently?"></textarea>
+                    placeholder="Key lessons, areas to improve, growth insights, or challenges overcome..."></textarea>
         </div>
         <div class="field" style="margin-top:12px;">
           <label class="field-label" for="insight">Insight</label>
           <textarea id="insight" name="insight" class="field-textarea field-textarea--reflection" rows="3"
-                    placeholder="What did today teach you?"></textarea>
+                    placeholder="Realizations, patterns noticed, deeper understanding, or aha moments..."></textarea>
         </div>
         <div class="field" style="margin-top:12px;">
           <label class="field-label" for="gratefulFor">Grateful for…</label>
           <textarea id="gratefulFor" name="gratefulFor" class="field-textarea field-textarea--reflection" rows="2"
-                    placeholder="What are you grateful for?"></textarea>
+                    placeholder="People, moments, simple things, or unexpected blessings..."></textarea>
         </div>
       </section>
 
@@ -117,7 +117,7 @@
             <input type="checkbox" id="money" name="money" class="habit-check" />
             $ (money)
           </label>
-          <input type="text" id="moneyNote" name="moneyNote" class="habit-note" placeholder="Amount or notes...">
+          <input type="text" id="moneyNote" name="moneyNote" class="habit-note" placeholder="Amount spent or earned...">
         </div>
 
         <!-- Read & Meditation (standalone) -->
@@ -128,7 +128,7 @@
               <input type="checkbox" id="intellectual" name="intellectual" class="habit-check" />
               Read
             </label>
-            <input type="text" id="intellectualNote" name="intellectualNote" class="habit-note" placeholder="Notes...">
+            <input type="text" id="intellectualNote" name="intellectualNote" class="habit-note" placeholder="Title, topic, or key idea...">
           </div>
 
           <!-- Meditation -->
@@ -137,7 +137,7 @@
               <input type="checkbox" id="meditation" name="meditation" class="habit-check" />
               Meditation
             </label>
-            <input type="text" id="meditationNote" name="meditationNote" class="habit-note" placeholder="Notes...">
+            <input type="text" id="meditationNote" name="meditationNote" class="habit-note" placeholder="Duration, type, or feeling...">
           </div>
         </div>
 
@@ -150,7 +150,7 @@
               <input type="checkbox" id="hobby" name="hobby" class="habit-check habit--green" />
               Hobby
             </label>
-            <input type="text" id="hobbyNote" name="hobbyNote" class="habit-note habit-note--energy" placeholder="Notes...">
+            <input type="text" id="hobbyNote" name="hobbyNote" class="habit-note habit-note--energy" placeholder="What did you enjoy? Time spent...">
           </div>
 
           <!-- MJ -->
@@ -159,7 +159,7 @@
               <input type="checkbox" id="mj" name="mj" class="habit-check habit--green" data-dependent="per" />
               MJ
             </label>
-            <input type="text" id="mjNote" name="mjNote" class="habit-note habit-note--energy" placeholder="Notes...">
+            <input type="text" id="mjNote" name="mjNote" class="habit-note habit-note--energy" placeholder="Amount, time, experience...">
           </div>
 
           <!-- PER -->
@@ -168,7 +168,7 @@
               <input type="checkbox" id="per" name="per" class="habit-check habit--green" />
               PER
             </label>
-            <input type="text" id="perNote" name="perNote" class="habit-note habit-note--energy" placeholder="Notes...">
+            <input type="text" id="perNote" name="perNote" class="habit-note habit-note--energy" placeholder="Type, amount, mood...">
           </div>
 
           <!-- SCL -->
@@ -177,7 +177,7 @@
               <input type="checkbox" id="scl" name="scl" class="habit-check habit--green" />
               SCL
             </label>
-            <input type="text" id="sclNote" name="sclNote" class="habit-note habit-note--energy" placeholder="Notes...">
+            <input type="text" id="sclNote" name="sclNote" class="habit-note habit-note--energy" placeholder="Who, where, how long...">
           </div>
 
           <!-- FAM -->
@@ -186,7 +186,7 @@
               <input type="checkbox" id="fam" name="fam" class="habit-check habit--green" />
               FAM
             </label>
-            <input type="text" id="famNote" name="famNote" class="habit-note habit-note--energy" placeholder="Notes...">
+            <input type="text" id="famNote" name="famNote" class="habit-note habit-note--energy" placeholder="Who, activity, or note...">
           </div>
         </div>
 
@@ -199,7 +199,7 @@
               <input type="checkbox" id="cardio" name="cardio" class="habit-check habit--blue" data-dependent="phys" />
               Cardio
             </label>
-            <input type="text" id="cardioNote" name="cardioNote" class="habit-note habit-note--fitness" placeholder="Notes...">
+            <input type="text" id="cardioNote" name="cardioNote" class="habit-note habit-note--fitness" placeholder="Type, duration, intensity...">
           </div>
 
           <!-- Gym -->
@@ -208,7 +208,7 @@
               <input type="checkbox" id="gym" name="gym" class="habit-check habit--blue" data-dependent="phys" />
               Gym
             </label>
-            <input type="text" id="gymNote" name="gymNote" class="habit-note habit-note--fitness" placeholder="Notes...">
+            <input type="text" id="gymNote" name="gymNote" class="habit-note habit-note--fitness" placeholder="Workout, sets, or how you felt...">
           </div>
 
           <!-- PHYS -->
@@ -217,7 +217,7 @@
               <input type="checkbox" id="phys" name="phys" class="habit-check habit--blue" />
               PHYS
             </label>
-            <input type="text" id="physNote" name="physNote" class="habit-note habit-note--fitness" placeholder="Notes...">
+            <input type="text" id="physNote" name="physNote" class="habit-note habit-note--fitness" placeholder="Type of movement or activity...">
           </div>
 
           <!-- 3L Water -->
@@ -226,7 +226,7 @@
               <input type="checkbox" id="threeLWater" name="threeLWater" class="habit-check habit--blue" />
               3L Water
             </label>
-            <input type="text" id="threeLWaterNote" name="threeLWaterNote" class="habit-note habit-note--fitness" placeholder="Notes...">
+            <input type="text" id="threeLWaterNote" name="threeLWaterNote" class="habit-note habit-note--fitness" placeholder="Actual amount or notes...">
           </div>
         </div>
 
@@ -239,7 +239,7 @@
               <input type="checkbox" id="toxic" name="toxic" class="habit-check habit--black" />
               Toxic
             </label>
-            <input type="text" id="toxicNote" name="toxicNote" class="habit-note habit-note--black" placeholder="Notes...">
+            <input type="text" id="toxicNote" name="toxicNote" class="habit-note habit-note--black" placeholder="What, amount, or reflection...">
           </div>
 
           <!-- NOOTROPIC -->
@@ -248,7 +248,7 @@
               <input type="checkbox" id="nootropic" name="nootropic" class="habit-check habit--black" />
               NOOTROPIC
             </label>
-            <input type="text" id="nootropicNote" name="nootropicNote" class="habit-note habit-note--black" placeholder="Notes...">
+            <input type="text" id="nootropicNote" name="nootropicNote" class="habit-note habit-note--black" placeholder="Type, dose, or effect...">
           </div>
         </div>
       </section>
