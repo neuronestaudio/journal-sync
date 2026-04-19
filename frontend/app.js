@@ -120,9 +120,11 @@ function populateForm(entry) {
     if (noteEl && entry[habit + 'Note']) noteEl.value = entry[habit + 'Note'];
   });
 
-  // Money
+  // Money checkbox and notes
   const moneyEl = document.getElementById('money');
-  if (moneyEl && entry.money) moneyEl.value = entry.money;
+  const moneyNoteEl = document.getElementById('moneyNote');
+  if (moneyEl && entry.money === 'Y') moneyEl.checked = true;
+  if (moneyNoteEl && entry.moneyNote) moneyNoteEl.value = entry.moneyNote;
 
   showToast("Today's entry loaded from local storage", 'success');
 }
@@ -199,8 +201,9 @@ form.addEventListener('submit', async (e) => {
     nootropic:           getHabitValue('nootropic'),
     nootropicNote:       getHabitNote('nootropicNote'),
 
-    // Money
-    money:               val('money'),
+    // Money checkbox and notes
+    money:               getHabitValue('money'),
+    moneyNote:           getHabitNote('moneyNote'),
 
     // Metadata
     createdAt,
@@ -465,7 +468,8 @@ function saveDraft() {
       famNote:             getHabitNote('famNote'),
       nootropic:           getHabitValue('nootropic'),
       nootropicNote:       getHabitNote('nootropicNote'),
-      money:               val('money'),
+      money:               getHabitValue('money'),
+      moneyNote:           getHabitNote('moneyNote'),
       savedAt:             new Date().toISOString(),
     };
     localStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
@@ -504,9 +508,11 @@ function restoreDraft() {
       if (noteEl && draft[habit + 'Note']) noteEl.value = draft[habit + 'Note'];
     });
 
-    // Restore money
+    // Restore money checkbox and notes
     const moneyEl = document.getElementById('money');
-    if (moneyEl && draft.money) moneyEl.value = draft.money;
+    const moneyNoteEl = document.getElementById('moneyNote');
+    if (moneyEl && draft.money === 'Y') moneyEl.checked = true;
+    if (moneyNoteEl && draft.moneyNote) moneyNoteEl.value = draft.moneyNote;
 
     showToast('Draft restored from your last session', 'success');
   } catch {

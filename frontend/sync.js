@@ -141,7 +141,7 @@ function buildPayload(entry) {
     'SCL':                        formatHabit(entry.scl, entry.sclNote),
     'PHYS':                       formatHabit(entry.phys, entry.physNote),
     'FAM':                        formatHabit(entry.fam, entry.famNote),
-    '$':                          entry.money,
+    '$':                          formatHabit(entry.money, entry.moneyNote),
     'NOOTROPIC':                  formatHabit(entry.nootropic, entry.nootropicNote),
   };
 }
