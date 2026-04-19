@@ -104,8 +104,8 @@ function addActivityInput() {
   const item = document.createElement('div');
   item.className = 'activity-item';
   item.innerHTML = `
-    <input type="text" class="field-textarea field-textarea--activity activity-input"
-           placeholder="Work, exercise, creative, learning, rest — what filled your day?">
+    <textarea class="field-textarea field-textarea--activity activity-input" rows="2"
+           placeholder="Work, exercise, creative, learning, rest — what filled your day?"></textarea>
     <button type="button" class="btn-remove-activity" title="Remove activity">✕</button>
   `;
   container.appendChild(item);
