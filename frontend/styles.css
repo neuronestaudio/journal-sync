@@ -375,10 +375,20 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   margin-bottom: 8px;
 }
 
+.habit-grid--2col {
+  grid-template-columns: 1fr 1fr;
+}
+
 .habit-item {
   display: flex;
   flex-direction: column;
   gap: 6px;
+}
+
+.habit-item--top {
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--c-border);
 }
 
 .habit-label {

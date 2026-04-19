@@ -111,6 +111,15 @@
 
       <!-- Habit Tracking -->
       <section class="card" aria-label="Habits">
+        <!-- Money (at top) -->
+        <div class="habit-item habit-item--top">
+          <label class="habit-label">
+            <input type="checkbox" id="money" name="money" class="habit-check" />
+            $ (money)
+          </label>
+          <input type="text" id="moneyNote" name="moneyNote" class="habit-note" placeholder="Amount or notes...">
+        </div>
+
         <!-- Read & Meditation (standalone) -->
         <div class="habit-grid">
           <!-- Read (Intellectual) -->
@@ -132,8 +141,8 @@
           </div>
         </div>
 
-        <!-- Green Group (1-6) -->
-        <div class="habit-divider">Green</div>
+        <!-- ENERGY Group -->
+        <div class="habit-divider">ENERGY</div>
         <div class="habit-grid">
           <!-- Hobby -->
           <div class="habit-item">
@@ -142,15 +151,6 @@
               Hobby
             </label>
             <input type="text" id="hobbyNote" name="hobbyNote" class="habit-note" placeholder="Notes...">
-          </div>
-
-          <!-- 3L Water -->
-          <div class="habit-item">
-            <label class="habit-label">
-              <input type="checkbox" id="threeLWater" name="threeLWater" class="habit-check habit--green" />
-              3L Water
-            </label>
-            <input type="text" id="threeLWaterNote" name="threeLWaterNote" class="habit-note" placeholder="Notes...">
           </div>
 
           <!-- MJ -->
@@ -190,9 +190,9 @@
           </div>
         </div>
 
-        <!-- Blue Group (Fitness) -->
+        <!-- Fitness Group (2 columns) -->
         <div class="habit-divider">Fitness</div>
-        <div class="habit-grid">
+        <div class="habit-grid habit-grid--2col">
           <!-- Cardio -->
           <div class="habit-item">
             <label class="habit-label">
@@ -219,6 +219,15 @@
             </label>
             <input type="text" id="physNote" name="physNote" class="habit-note" placeholder="Notes...">
           </div>
+
+          <!-- 3L Water -->
+          <div class="habit-item">
+            <label class="habit-label">
+              <input type="checkbox" id="threeLWater" name="threeLWater" class="habit-check habit--blue" />
+              3L Water
+            </label>
+            <input type="text" id="threeLWaterNote" name="threeLWaterNote" class="habit-note" placeholder="Notes...">
+          </div>
         </div>
 
         <!-- Black Magic Group -->
@@ -241,15 +250,6 @@
             </label>
             <input type="text" id="nootropicNote" name="nootropicNote" class="habit-note habit-note--black" placeholder="Notes...">
           </div>
-        </div>
-
-        <!-- Money -->
-        <div class="habit-item" style="margin-top: 16px;">
-          <label class="habit-label">
-            <input type="checkbox" id="money" name="money" class="habit-check" />
-            $ (money)
-          </label>
-          <input type="text" id="moneyNote" name="moneyNote" class="habit-note" placeholder="Amount or notes...">
         </div>
       </section>
 
