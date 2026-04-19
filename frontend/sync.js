@@ -125,7 +125,7 @@ function buildPayload(entry) {
     'Wake Time':                  entry.wakeTime,
     'People':                     entry.people,
     'Activity':                   entry.activity,
-    'What moved forward/Highlights': entry.highlight,
+    'What moved forward':         entry.highlight,
     'Mistakes/Learnings':         entry.mistakes,
     'Insight':                    entry.insight,
     'Grateful for':               entry.gratefulFor,
