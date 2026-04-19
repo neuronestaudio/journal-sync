@@ -42,6 +42,7 @@ async function init() {
   setupConnectivityListeners();
   setupAutosave();
   setupDependentCheckboxes();
+  setupActivityControls();
 
   // Warn if the backend URL hasn't been configured yet
   if (!isConfigured()) {
@@ -76,6 +77,83 @@ function prefillDate() {
 dateInput.addEventListener('change', () => {
   if (dateInput.value) dayInput.value = dayName(dateInput.value);
 });
+
+// ─── Dynamic Activity Inputs ──────────────────────────────────────
+
+function setupActivityControls() {
+  const container = document.getElementById('activities-container');
+  const addBtn = document.getElementById('add-activity-btn');
+
+  addBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    addActivityInput();
+    updateActivityButtonVisibility();
+  });
+
+  container.addEventListener('click', (e) => {
+    if (e.target.classList.contains('btn-remove-activity')) {
+      e.preventDefault();
+      e.target.closest('.activity-item').remove();
+      updateActivityButtonVisibility();
+    }
+  });
+}
+
+function addActivityInput() {
+  const container = document.getElementById('activities-container');
+  const item = document.createElement('div');
+  item.className = 'activity-item';
+  item.innerHTML = `
+    <input type="text" class="field-textarea field-textarea--activity activity-input"
+           placeholder="Work, exercise, creative, learning, rest — what filled your day?">
+    <button type="button" class="btn-remove-activity" title="Remove activity">✕</button>
+  `;
+  container.appendChild(item);
+}
+
+function updateActivityButtonVisibility() {
+  const container = document.getElementById('activities-container');
+  const items = container.querySelectorAll('.activity-item');
+  items.forEach((item, idx) => {
+    const removeBtn = item.querySelector('.btn-remove-activity');
+    removeBtn.style.display = items.length > 1 ? 'block' : 'none';
+  });
+}
+
+function getActivityValue() {
+  const container = document.getElementById('activities-container');
+  const inputs = container.querySelectorAll('.activity-input');
+  const values = Array.from(inputs)
+    .map(input => input.value.trim())
+    .filter(val => val !== '');
+  return values.join(' > ');
+}
+
+function restoreActivityInputs(activityString) {
+  const container = document.getElementById('activities-container');
+  // Clear existing inputs except the first one
+  const items = container.querySelectorAll('.activity-item');
+  for (let i = items.length - 1; i > 0; i--) {
+    items[i].remove();
+  }
+
+  // Split by " > " and populate
+  const activities = activityString.split(' > ').map(a => a.trim()).filter(a => a);
+  if (activities.length === 0) return;
+
+  // Set first input
+  const firstInput = container.querySelector('.activity-input');
+  if (firstInput) firstInput.value = activities[0];
+
+  // Add remaining inputs
+  for (let i = 1; i < activities.length; i++) {
+    addActivityInput();
+    const inputs = container.querySelectorAll('.activity-input');
+    inputs[inputs.length - 1].value = activities[i];
+  }
+
+  updateActivityButtonVisibility();
+}
 
 // ─── Load today's entry from IndexedDB ───────────────────────────────────────
 
@@ -175,6 +253,14 @@ form.addEventListener('submit', async (e) => {
     return existingValue ? `${existingValue} ${newValue}` : newValue;
   };
 
+  // Helper to append activity (with > separator)
+  const appendActivityValue = (existingEntry) => {
+    const newActivities = getActivityValue();
+    if (!newActivities) return existingEntry?.activity || '';
+    const existingValue = existingEntry?.activity || '';
+    return existingValue ? `${existingValue} > ${newActivities}` : newActivities;
+  };
+
   /** @type {JournalEntry} */
   const entry = {
     id:                  dateVal,
@@ -184,7 +270,7 @@ form.addEventListener('submit', async (e) => {
     // Reflection fields (append to existing)
     wakeTime:            val('wakeTime'),
     people:              appendValue('people', existing),
-    activity:            appendValue('activity', existing),
+    activity:            appendActivityValue(existing),
     highlight:           appendValue('highlight', existing),
     mistakes:            appendValue('mistakes', existing),
     insight:             appendValue('insight', existing),
@@ -454,7 +540,7 @@ function saveDraft() {
       date:                dateInput.value,
       wakeTime:            val('wakeTime'),
       people:              val('people'),
-      activity:            val('activity'),
+      activity:            getActivityValue(),
       highlight:           val('highlight'),
       mistakes:            val('mistakes'),
       insight:             val('insight'),
@@ -510,7 +596,7 @@ function restoreDraft() {
     // Restore reflection fields
     if (draft.wakeTime) document.getElementById('wakeTime').value = draft.wakeTime;
     if (draft.people) document.getElementById('people').value = draft.people;
-    if (draft.activity) document.getElementById('activity').value = draft.activity;
+    if (draft.activity) restoreActivityInputs(draft.activity);
     if (draft.highlight) document.getElementById('highlight').value = draft.highlight;
     if (draft.mistakes) document.getElementById('mistakes').value = draft.mistakes;
     if (draft.insight) document.getElementById('insight').value = draft.insight;

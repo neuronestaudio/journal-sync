@@ -571,6 +571,48 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   }
 }
 
+/* ── Activity controls ────────────────────────────────────────── */
+#activities-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.activity-item {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.activity-input {
+  flex: 1;
+  min-height: 44px !important;
+}
+
+.btn-add-activity,
+.btn-remove-activity {
+  padding: 8px 12px;
+  background: var(--c-surface-2);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-sm);
+  color: var(--c-text);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  flex-shrink: 0;
+}
+
+.btn-add-activity:hover,
+.btn-remove-activity:hover {
+  background: var(--c-border);
+  border-color: var(--c-border-focus);
+}
+
+.btn-add-activity {
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
 /* ── Reduced motion ───────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *,

@@ -78,10 +78,20 @@
           <textarea id="people" name="people" class="field-textarea field-textarea--activity" rows="2"
                     placeholder="Family, friends, colleagues, alone? Who mattered today?"></textarea>
         </div>
+
+        <!-- Dynamic Activity List -->
         <div class="field" style="margin-top:12px;">
-          <label class="field-label" for="activity">Activity</label>
-          <textarea id="activity" name="activity" class="field-textarea field-textarea--activity" rows="2"
-                    placeholder="Work, exercise, creative, learning, rest — what filled your day?"></textarea>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <label class="field-label">Activity</label>
+            <button type="button" id="add-activity-btn" class="btn-add-activity" title="Add activity">+ Add</button>
+          </div>
+          <div id="activities-container">
+            <div class="activity-item">
+              <input type="text" class="field-textarea field-textarea--activity activity-input"
+                     placeholder="Work, exercise, creative, learning, rest — what filled your day?">
+              <button type="button" class="btn-remove-activity" title="Remove activity" style="display: none;">✕</button>
+            </div>
+          </div>
         </div>
       </section>
 
