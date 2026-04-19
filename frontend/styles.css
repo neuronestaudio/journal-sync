@@ -500,6 +500,29 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   border-color: #3a3a3a;
 }
 
+/* Section-specific habit note colors */
+.habit-note--energy {
+  background: rgba(76, 175, 116, 0.08);
+  border-color: rgba(76, 175, 116, 0.20);
+  color: var(--c-text);
+}
+
+.habit-note--energy:focus {
+  background: rgba(76, 175, 116, 0.12);
+  border-color: var(--c-border-focus);
+}
+
+.habit-note--fitness {
+  background: rgba(66, 165, 245, 0.08);
+  border-color: rgba(66, 165, 245, 0.20);
+  color: var(--c-text);
+}
+
+.habit-note--fitness:focus {
+  background: rgba(66, 165, 245, 0.12);
+  border-color: var(--c-border-focus);
+}
+
 /* ── Toast ────────────────────────────────────────────────── */
 .toast {
   position: fixed;
