@@ -41,6 +41,7 @@ async function init() {
   registerServiceWorker();
   setupConnectivityListeners();
   setupAutosave();
+  setupDependentCheckboxes();
 
   // Warn if the backend URL hasn't been configured yet
   if (!isConfigured()) {
@@ -384,6 +385,38 @@ function setupAutosave() {
     });
   });
 }
+
+// ─── Dependent checkboxes ─────────────────────────────────────────────────────
+
+/**
+ * Setup dependent checkbox logic:
+ * - If Cardio OR Gym is checked → auto-check PHYS
+ * - If MJ is checked → auto-check PER
+ */
+function setupDependentCheckboxes() {
+  const cardioEl = document.getElementById('cardio');
+  const gymEl = document.getElementById('gym');
+  const physEl = document.getElementById('phys');
+  const mjEl = document.getElementById('mj');
+  const perEl = document.getElementById('per');
+
+  const updatePhys = () => {
+    if (cardioEl.checked || gymEl.checked) {
+      physEl.checked = true;
+    }
+  };
+
+  const updatePer = () => {
+    if (mjEl.checked) {
+      perEl.checked = true;
+    }
+  };
+
+  cardioEl.addEventListener('change', updatePhys);
+  gymEl.addEventListener('change', updatePhys);
+  mjEl.addEventListener('change', updatePer);
+}
+
 
 function saveDraft() {
   try {

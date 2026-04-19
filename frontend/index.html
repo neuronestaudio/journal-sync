@@ -111,23 +111,15 @@
 
       <!-- Habit Tracking -->
       <section class="card" aria-label="Habits">
+        <!-- Read & Meditation (standalone) -->
         <div class="habit-grid">
-          <!-- Intellectual (Reading/Habit) -->
+          <!-- Read (Intellectual) -->
           <div class="habit-item">
             <label class="habit-label">
               <input type="checkbox" id="intellectual" name="intellectual" class="habit-check" />
-              Intellectual
+              Read
             </label>
             <input type="text" id="intellectualNote" name="intellectualNote" class="habit-note" placeholder="Notes...">
-          </div>
-
-          <!-- Hobby -->
-          <div class="habit-item">
-            <label class="habit-label">
-              <input type="checkbox" id="hobby" name="hobby" class="habit-check" />
-              Hobby
-            </label>
-            <input type="text" id="hobbyNote" name="hobbyNote" class="habit-note" placeholder="Notes...">
           </div>
 
           <!-- Meditation -->
@@ -138,47 +130,33 @@
             </label>
             <input type="text" id="meditationNote" name="meditationNote" class="habit-note" placeholder="Notes...">
           </div>
+        </div>
+
+        <!-- Green Group (1-6) -->
+        <div class="habit-divider">Green</div>
+        <div class="habit-grid">
+          <!-- Hobby -->
+          <div class="habit-item">
+            <label class="habit-label">
+              <input type="checkbox" id="hobby" name="hobby" class="habit-check habit--green" />
+              Hobby
+            </label>
+            <input type="text" id="hobbyNote" name="hobbyNote" class="habit-note" placeholder="Notes...">
+          </div>
 
           <!-- 3L Water -->
           <div class="habit-item">
             <label class="habit-label">
-              <input type="checkbox" id="threeLWater" name="threeLWater" class="habit-check" />
+              <input type="checkbox" id="threeLWater" name="threeLWater" class="habit-check habit--green" />
               3L Water
             </label>
             <input type="text" id="threeLWaterNote" name="threeLWaterNote" class="habit-note" placeholder="Notes...">
           </div>
 
-          <!-- Toxic -->
-          <div class="habit-item">
-            <label class="habit-label">
-              <input type="checkbox" id="toxic" name="toxic" class="habit-check" />
-              Toxic
-            </label>
-            <input type="text" id="toxicNote" name="toxicNote" class="habit-note" placeholder="Notes...">
-          </div>
-
-          <!-- Gym -->
-          <div class="habit-item">
-            <label class="habit-label">
-              <input type="checkbox" id="gym" name="gym" class="habit-check" />
-              Gym
-            </label>
-            <input type="text" id="gymNote" name="gymNote" class="habit-note" placeholder="Notes...">
-          </div>
-
-          <!-- Cardio -->
-          <div class="habit-item">
-            <label class="habit-label">
-              <input type="checkbox" id="cardio" name="cardio" class="habit-check" />
-              Cardio
-            </label>
-            <input type="text" id="cardioNote" name="cardioNote" class="habit-note" placeholder="Notes...">
-          </div>
-
           <!-- MJ -->
           <div class="habit-item">
             <label class="habit-label">
-              <input type="checkbox" id="mj" name="mj" class="habit-check" />
+              <input type="checkbox" id="mj" name="mj" class="habit-check habit--green" data-dependent="per" />
               MJ
             </label>
             <input type="text" id="mjNote" name="mjNote" class="habit-note" placeholder="Notes...">
@@ -187,7 +165,7 @@
           <!-- PER -->
           <div class="habit-item">
             <label class="habit-label">
-              <input type="checkbox" id="per" name="per" class="habit-check" />
+              <input type="checkbox" id="per" name="per" class="habit-check habit--green" />
               PER
             </label>
             <input type="text" id="perNote" name="perNote" class="habit-note" placeholder="Notes...">
@@ -196,37 +174,72 @@
           <!-- SCL -->
           <div class="habit-item">
             <label class="habit-label">
-              <input type="checkbox" id="scl" name="scl" class="habit-check" />
+              <input type="checkbox" id="scl" name="scl" class="habit-check habit--green" />
               SCL
             </label>
             <input type="text" id="sclNote" name="sclNote" class="habit-note" placeholder="Notes...">
           </div>
 
-          <!-- PHYS -->
-          <div class="habit-item">
-            <label class="habit-label">
-              <input type="checkbox" id="phys" name="phys" class="habit-check" />
-              PHYS
-            </label>
-            <input type="text" id="physNote" name="physNote" class="habit-note" placeholder="Notes...">
-          </div>
-
           <!-- FAM -->
           <div class="habit-item">
             <label class="habit-label">
-              <input type="checkbox" id="fam" name="fam" class="habit-check" />
+              <input type="checkbox" id="fam" name="fam" class="habit-check habit--green" />
               FAM
             </label>
             <input type="text" id="famNote" name="famNote" class="habit-note" placeholder="Notes...">
           </div>
+        </div>
+
+        <!-- Blue Group (Fitness) -->
+        <div class="habit-divider">Fitness</div>
+        <div class="habit-grid">
+          <!-- Cardio -->
+          <div class="habit-item">
+            <label class="habit-label">
+              <input type="checkbox" id="cardio" name="cardio" class="habit-check habit--blue" data-dependent="phys" />
+              Cardio
+            </label>
+            <input type="text" id="cardioNote" name="cardioNote" class="habit-note" placeholder="Notes...">
+          </div>
+
+          <!-- Gym -->
+          <div class="habit-item">
+            <label class="habit-label">
+              <input type="checkbox" id="gym" name="gym" class="habit-check habit--blue" data-dependent="phys" />
+              Gym
+            </label>
+            <input type="text" id="gymNote" name="gymNote" class="habit-note" placeholder="Notes...">
+          </div>
+
+          <!-- PHYS -->
+          <div class="habit-item">
+            <label class="habit-label">
+              <input type="checkbox" id="phys" name="phys" class="habit-check habit--blue" />
+              PHYS
+            </label>
+            <input type="text" id="physNote" name="physNote" class="habit-note" placeholder="Notes...">
+          </div>
+        </div>
+
+        <!-- Black Magic Group -->
+        <div class="habit-divider habit-divider--black">Black Magic</div>
+        <div class="habit-grid">
+          <!-- Toxic -->
+          <div class="habit-item">
+            <label class="habit-label habit-label--black">
+              <input type="checkbox" id="toxic" name="toxic" class="habit-check habit--black" />
+              Toxic
+            </label>
+            <input type="text" id="toxicNote" name="toxicNote" class="habit-note habit-note--black" placeholder="Notes...">
+          </div>
 
           <!-- NOOTROPIC -->
           <div class="habit-item">
-            <label class="habit-label">
-              <input type="checkbox" id="nootropic" name="nootropic" class="habit-check" />
+            <label class="habit-label habit-label--black">
+              <input type="checkbox" id="nootropic" name="nootropic" class="habit-check habit--black" />
               NOOTROPIC
             </label>
-            <input type="text" id="nootropicNote" name="nootropicNote" class="habit-note" placeholder="Notes...">
+            <input type="text" id="nootropicNote" name="nootropicNote" class="habit-note habit-note--black" placeholder="Notes...">
           </div>
         </div>
 

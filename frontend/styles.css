@@ -419,6 +419,56 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   background: var(--c-surface);
 }
 
+/* Habit group dividers */
+.habit-divider {
+  margin: 16px 0 12px 0;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--c-border);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--c-text-muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.habit-divider--black {
+  border-bottom-color: #2a2a2a;
+  color: #6a6a6a;
+}
+
+/* Habit group styling */
+.habit--green .accent-color {
+  accent-color: #4caf74;
+}
+
+.habit--blue {
+  accent-color: #42a5f5;
+}
+
+.habit--black {
+  accent-color: #757575;
+}
+
+/* Black magic styling */
+.habit-label--black {
+  color: #a0a0a0;
+}
+
+.habit-note--black {
+  background: #1a1a1a;
+  border-color: #2a2a2a;
+  color: #c0c0c0;
+}
+
+.habit-note--black::placeholder {
+  color: #555555;
+}
+
+.habit-note--black:focus {
+  background: #202020;
+  border-color: #3a3a3a;
+}
+
 /* ── Toast ────────────────────────────────────────────────── */
 .toast {
   position: fixed;
