@@ -101,8 +101,17 @@ function populateForm(entry) {
   if (entry.date) dateInput.value = entry.date;
   if (entry.date) dayInput.value = dayName(entry.date);
 
+  // Reflection fields
+  if (entry.wakeTime) document.getElementById('wakeTime').value = entry.wakeTime;
+  if (entry.people) document.getElementById('people').value = entry.people;
+  if (entry.activity) document.getElementById('activity').value = entry.activity;
+  if (entry.highlight) document.getElementById('highlight').value = entry.highlight;
+  if (entry.mistakes) document.getElementById('mistakes').value = entry.mistakes;
+  if (entry.insight) document.getElementById('insight').value = entry.insight;
+  if (entry.gratefulFor) document.getElementById('gratefulFor').value = entry.gratefulFor;
+
   // Habits (checkboxes)
-  const habits = ['readingHabit', 'hobby', 'meditate', 'threeLWater', 'seshIntoxicant', 'gym', 'runCardio', 'media', 'perso', 'social', 'phys', 'financial', 'rit'];
+  const habits = ['intellectual', 'hobby', 'meditation', 'threeLWater', 'toxic', 'gym', 'cardio', 'mj', 'per', 'scl', 'phys', 'fam', 'nootropic'];
   habits.forEach(habit => {
     const checkEl = document.getElementById(habit);
     const noteEl = document.getElementById(habit + 'Note');
@@ -390,32 +399,39 @@ function saveDraft() {
 
     const draft = {
       date:                dateInput.value,
-      readingHabit:        getHabitValue('readingHabit'),
-      readingHabitNote:    getHabitNote('readingHabitNote'),
+      wakeTime:            val('wakeTime'),
+      people:              val('people'),
+      activity:            val('activity'),
+      highlight:           val('highlight'),
+      mistakes:            val('mistakes'),
+      insight:             val('insight'),
+      gratefulFor:         val('gratefulFor'),
+      intellectual:        getHabitValue('intellectual'),
+      intellectualNote:    getHabitNote('intellectualNote'),
       hobby:               getHabitValue('hobby'),
       hobbyNote:           getHabitNote('hobbyNote'),
-      meditate:            getHabitValue('meditate'),
-      meditateNote:        getHabitNote('meditateNote'),
+      meditation:          getHabitValue('meditation'),
+      meditationNote:      getHabitNote('meditationNote'),
       threeLWater:         getHabitValue('threeLWater'),
       threeLWaterNote:     getHabitNote('threeLWaterNote'),
-      seshIntoxicant:      getHabitValue('seshIntoxicant'),
-      seshIntoxicantNote:  getHabitNote('seshIntoxicantNote'),
+      toxic:               getHabitValue('toxic'),
+      toxicNote:           getHabitNote('toxicNote'),
       gym:                 getHabitValue('gym'),
       gymNote:             getHabitNote('gymNote'),
-      runCardio:           getHabitValue('runCardio'),
-      runCardioNote:       getHabitNote('runCardioNote'),
-      media:               getHabitValue('media'),
-      mediaNote:           getHabitNote('mediaNote'),
-      perso:               getHabitValue('perso'),
-      persoNote:           getHabitNote('persoNote'),
-      social:              getHabitValue('social'),
-      socialNote:          getHabitNote('socialNote'),
+      cardio:              getHabitValue('cardio'),
+      cardioNote:          getHabitNote('cardioNote'),
+      mj:                  getHabitValue('mj'),
+      mjNote:              getHabitNote('mjNote'),
+      per:                 getHabitValue('per'),
+      perNote:             getHabitNote('perNote'),
+      scl:                 getHabitValue('scl'),
+      sclNote:             getHabitNote('sclNote'),
       phys:                getHabitValue('phys'),
       physNote:            getHabitNote('physNote'),
-      financial:           getHabitValue('financial'),
-      financialNote:       getHabitNote('financialNote'),
-      rit:                 getHabitValue('rit'),
-      ritNote:             getHabitNote('ritNote'),
+      fam:                 getHabitValue('fam'),
+      famNote:             getHabitNote('famNote'),
+      nootropic:           getHabitValue('nootropic'),
+      nootropicNote:       getHabitNote('nootropicNote'),
       money:               val('money'),
       savedAt:             new Date().toISOString(),
     };
@@ -437,8 +453,17 @@ function restoreDraft() {
       dayInput.value  = dayName(draft.date);
     }
 
+    // Restore reflection fields
+    if (draft.wakeTime) document.getElementById('wakeTime').value = draft.wakeTime;
+    if (draft.people) document.getElementById('people').value = draft.people;
+    if (draft.activity) document.getElementById('activity').value = draft.activity;
+    if (draft.highlight) document.getElementById('highlight').value = draft.highlight;
+    if (draft.mistakes) document.getElementById('mistakes').value = draft.mistakes;
+    if (draft.insight) document.getElementById('insight').value = draft.insight;
+    if (draft.gratefulFor) document.getElementById('gratefulFor').value = draft.gratefulFor;
+
     // Restore habit checkboxes and notes
-    const habits = ['readingHabit', 'hobby', 'meditate', 'threeLWater', 'seshIntoxicant', 'gym', 'runCardio', 'media', 'perso', 'social', 'phys', 'financial', 'rit'];
+    const habits = ['intellectual', 'hobby', 'meditation', 'threeLWater', 'toxic', 'gym', 'cardio', 'mj', 'per', 'scl', 'phys', 'fam', 'nootropic'];
     habits.forEach(habit => {
       const checkEl = document.getElementById(habit);
       const noteEl = document.getElementById(habit + 'Note');
